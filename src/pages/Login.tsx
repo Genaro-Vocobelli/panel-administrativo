@@ -1,15 +1,15 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '@/context/AuthContext';
-import { supabase } from '@/lib/supabase';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/context/AuthContext";
+import { supabase } from "@/lib/supabase";
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [showReset, setShowReset] = useState(false);
-  const [resetEmail, setResetEmail] = useState('');
+  const [resetEmail, setResetEmail] = useState("");
   const [resetSent, setResetSent] = useState(false);
   const [resetLoading, setResetLoading] = useState(false);
   const { signIn } = useAuth();
@@ -17,14 +17,14 @@ const Login = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
+    setError("");
     setLoading(true);
     const { error } = await signIn(email, password);
     setLoading(false);
     if (error) {
-      setError('Email o contraseña incorrectos');
+      setError("Email o contraseña incorrectos");
     } else {
-      navigate('/');
+      navigate("/");
     }
   };
 
@@ -44,8 +44,10 @@ const Login = () => {
     <div className="min-h-screen bg-background flex items-center justify-center p-6">
       <div className="w-full max-w-sm">
         <div className="mb-10">
-          <h1 className="font-display text-4xl tracking-tight mb-1">NEUZ</h1>
-          <p className="font-mono text-xs text-muted-foreground uppercase tracking-widest">Studio Panel</p>
+          <h1 className="font-display text-4xl tracking-tight mb-1">Panel</h1>
+          <p className="font-mono text-xs text-muted-foreground uppercase tracking-widest">
+            Administrativo
+          </p>
         </div>
 
         {!showReset ? (
@@ -54,23 +56,27 @@ const Login = () => {
 
             <form onSubmit={handleSubmit} className="space-y-5">
               <div>
-                <label className="block text-xs font-mono text-muted-foreground uppercase tracking-wider mb-2">Email</label>
+                <label className="block text-xs font-mono text-muted-foreground uppercase tracking-wider mb-2">
+                  Email
+                </label>
                 <input
                   type="email"
                   value={email}
-                  onChange={e => setEmail(e.target.value)}
+                  onChange={(e) => setEmail(e.target.value)}
                   required
                   className="w-full bg-transparent border border-border px-3 py-2.5 text-sm font-mono outline-none focus:border-foreground transition-colors"
-                  placeholder="usuario@neuz.studio"
+                  placeholder="usuario@panel.administrativo"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-mono text-muted-foreground uppercase tracking-wider mb-2">Contrasena</label>
+                <label className="block text-xs font-mono text-muted-foreground uppercase tracking-wider mb-2">
+                  Contrasena
+                </label>
                 <input
                   type="password"
                   value={password}
-                  onChange={e => setPassword(e.target.value)}
+                  onChange={(e) => setPassword(e.target.value)}
                   required
                   className="w-full bg-transparent border border-border px-3 py-2.5 text-sm font-mono outline-none focus:border-foreground transition-colors"
                   placeholder="••••••••"
@@ -88,7 +94,7 @@ const Login = () => {
                 disabled={loading}
                 className="w-full bg-foreground text-card py-3 text-sm font-display uppercase tracking-wider hover:opacity-90 transition-opacity disabled:opacity-50"
               >
-                {loading ? 'Ingresando...' : 'Ingresar'}
+                {loading ? "Ingresando..." : "Ingresar"}
               </button>
 
               <button
@@ -109,17 +115,23 @@ const Login = () => {
 
             {resetSent ? (
               <div className="text-center py-4">
-                <p className="text-sm font-mono text-success mb-4">✓ Link enviado a {resetEmail}</p>
-                <p className="text-xs font-mono text-muted-foreground">Revisa tu email y seguí las instrucciones.</p>
+                <p className="text-sm font-mono text-success mb-4">
+                  ✓ Link enviado a {resetEmail}
+                </p>
+                <p className="text-xs font-mono text-muted-foreground">
+                  Revisa tu email y seguí las instrucciones.
+                </p>
               </div>
             ) : (
               <form onSubmit={handleReset} className="space-y-5">
                 <div>
-                  <label className="block text-xs font-mono text-muted-foreground uppercase tracking-wider mb-2">Email</label>
+                  <label className="block text-xs font-mono text-muted-foreground uppercase tracking-wider mb-2">
+                    Email
+                  </label>
                   <input
                     type="email"
                     value={resetEmail}
-                    onChange={e => setResetEmail(e.target.value)}
+                    onChange={(e) => setResetEmail(e.target.value)}
                     required
                     className="w-full bg-transparent border border-border px-3 py-2.5 text-sm font-mono outline-none focus:border-foreground transition-colors"
                     placeholder="usuario@neuz.studio"
@@ -131,13 +143,17 @@ const Login = () => {
                   disabled={resetLoading}
                   className="w-full bg-foreground text-card py-3 text-sm font-display uppercase tracking-wider hover:opacity-90 transition-opacity disabled:opacity-50"
                 >
-                  {resetLoading ? 'Enviando...' : 'Enviar Link'}
+                  {resetLoading ? "Enviando..." : "Enviar Link"}
                 </button>
               </form>
             )}
 
             <button
-              onClick={() => { setShowReset(false); setResetSent(false); setResetEmail(''); }}
+              onClick={() => {
+                setShowReset(false);
+                setResetSent(false);
+                setResetEmail("");
+              }}
               className="mt-4 w-full text-xs font-mono text-muted-foreground hover:text-foreground transition-colors text-center"
             >
               Volver al login

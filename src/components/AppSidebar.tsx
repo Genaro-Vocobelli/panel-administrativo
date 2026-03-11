@@ -67,7 +67,7 @@ const navItems: { to: string; label: string; icon: any; adminOnly: boolean; supe
     <aside className="w-56 min-h-screen bg-card border-r border-border flex flex-col justify-between">
       <div>
         <div className="p-6 pb-8">
-          <h2 className="font-display text-lg tracking-tight">NEUZ Studio</h2>
+          <h2 className="font-display text-lg tracking-tight">Panel Administrativo</h2>
           {isAdmin && (
             <span className="inline-block mt-1 px-2 py-0.5 bg-primary text-primary-foreground text-xs font-mono uppercase tracking-wider">
               Admin
